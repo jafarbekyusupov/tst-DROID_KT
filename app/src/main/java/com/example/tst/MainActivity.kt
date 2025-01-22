@@ -1,5 +1,10 @@
 package com.example.tst
 
+import android.R
+import android.net.Uri
+import android.net.Uri *
+import android.widget.MediaController
+import android.widget.VideoView
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -33,6 +38,19 @@ class MainActivity : AppCompatActivity() {
                 .setAction("Action", null)
                 .setAnchorView(R.id.fab).show()
         }
+
+        val videoView = findViewById<VideoView>(binding.testView.id)
+        //creatng media controller
+        val mediaController = MediaController(this)
+        mediaController.setAnchorView(videoView)
+        val uri:Uri = parse(
+            "android.resource://" + packageName + "/raw/GET_OUT"
+        )
+        //setting MediaController and URI -> start videoView
+        videoView.setMediaController(mediaController)
+        videoView.setVideoURI(uri)
+        videoView.requestFocus()
+        videoView.start()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
